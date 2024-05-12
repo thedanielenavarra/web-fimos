@@ -8,8 +8,12 @@ import (
 )
 
 type Config struct {
-	Token []string `json:"token"`
+	Token string `json:"token"`
+	Port  int    `json:"port"`
+	Host  string `json:"host"`
 }
+
+var config Config
 
 func configInit() {
 	// READ FROM A .json FILE
@@ -19,8 +23,7 @@ func configInit() {
 	}
 	fmt.Println("Successfully Opened config.json")
 	byteValue, _ := io.ReadAll(jsonFile)
-	fmt.Println(byteValue)
-	var config Config
+	//fmt.Println(byteValue)
 	json.Unmarshal(byteValue, &config)
 	fmt.Println(config.Token)
 	defer jsonFile.Close()

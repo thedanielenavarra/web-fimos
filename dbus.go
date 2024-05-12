@@ -17,7 +17,7 @@ func addRule(sourceIP string, destinationPort int, networkInterface string, prot
 	}
 	firewalld := conn.Object("org.fedoraproject.FirewallD1", "/org/fedoraproject/FirewallD1")
 
-	call := firewalld.Call("org.fedoraproject.FirewallD1.zone.addRichRule", 0, protocol, fmt.Sprintf("rule family='ipv4' source address='%s' port protocol='%s' port='%d' accept", sourceIP, protocol, destinationPort), 0)
+	call := firewalld.Call("org.fedoraproject.FirewallD1.zone.addRichRule", 0, networkInterface, fmt.Sprintf("rule family='ipv4' source address='%s' port protocol='%s' port='%d' accept", sourceIP, protocol, destinationPort), 0)
 
 	if call.Err != nil {
 		log.Fatal("Error during dbus call:", call.Err)
