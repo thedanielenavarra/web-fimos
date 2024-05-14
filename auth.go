@@ -28,8 +28,9 @@ func configInit(filepath string) {
 	jsonFile, err := os.Open(filepath)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
-	fmt.Println("Successfully Opened config.json")
+	fmt.Println("Successfully Opened ", filepath)
 	byteValue, _ := io.ReadAll(jsonFile)
 	//fmt.Println(byteValue)
 	json.Unmarshal(byteValue, &config)
@@ -38,7 +39,7 @@ func configInit(filepath string) {
 
 func tokenRegeneration(hostname string, port int) {
 	// WRITE TO A .json FILE
-	jsonFile, err := os.Create("config.json")
+	jsonFile, err := os.Create(os.Args[1])
 	if err != nil {
 		fmt.Println(err)
 	}
