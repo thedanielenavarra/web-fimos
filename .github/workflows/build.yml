@@ -10,7 +10,7 @@ jobs:
     - name: Prepare sources
       run: |
         mkdir -p ~/rpmbuild/SOURCES/
-        cp -R SOURCE/* ~/rpmbuild/SOURCES/
+        cp -R SOURCES/* ~/rpmbuild/SOURCES/
 
     - name: build RPM package
       id: rpm
@@ -18,7 +18,7 @@ jobs:
       with:
         spec_file: "webFimos.spec"
         sources_dir: "~/rpmbuild/SOURCES/"
-        
+
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
