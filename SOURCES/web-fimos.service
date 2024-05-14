@@ -3,7 +3,7 @@ Description=webFimos Service
 After=network.target
 
 [Service]
-ExecStart=/usr/sbin/webFimos /etc/web-fimos/config.json
+ExecStart=/usr/bin/webFimos /etc/web-fimos/web-fimos.json
 Restart=always
 StandardOutput=append:/var/log/web-fimos/web-fimos.log
 StandardError=append:/var/log/web-fimos/web-fimos.log
