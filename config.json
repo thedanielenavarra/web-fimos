@@ -1,5 +1,1 @@
-{
-    "port": 3000,
-    "host": "localhost",
-    "token": "1234567890"
-}
+{"token":"4219e08e5c5b9189e60a84aeb8305062a41064881a556059e0c699e326c60321a2f8c28482392d86e2aac641f0c6f62e10e3e83d7b7e898776c1b261ffde888b","port":9090,"host":"localhost"}
