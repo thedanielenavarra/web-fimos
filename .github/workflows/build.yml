@@ -1,24 +1,20 @@
-name: RPM Build
-on: push
+name: Build and Upload RPM
+
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Prepare sources
-      run: |
-        cp -R SOURCES/* .
-
-    - name: build RPM package
-      id: rpm
-      uses: naveenrajm7/rpmbuild@master
-      with:
-        spec_file: "webFimos.spec"
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: Binary RPM
-        path: ${{ steps.rpm.outputs.rpm_dir_path }}
+      - name: Upload RPM as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: rpm-package
+          path: RPMS/x86_64/webFimos-1.0-1.el8.x86_64.rpm
