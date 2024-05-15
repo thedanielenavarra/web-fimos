@@ -24,6 +24,7 @@ Your description here
 %install
 mkdir -p %{buildroot}/etc/web-fimos
 mkdir -p %{buildroot}/var/log/web-fimos
+chmod 700 %{buildroot}/var/log/web-fimos
 mkdir -p %{buildroot}/usr/bin
 install -m 755 %{SOURCE0} %{buildroot}/usr/bin/webFimos
 

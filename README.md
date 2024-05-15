@@ -3,7 +3,10 @@
 
 webFimos is an HTTP server written in Go that handles firewalld rules, it responds to requests that require authentication with a token. The token is generated when the application is run with the `--regen` flag.
 
-On this release it is only able to create ALLOW rules to requests coming from the IP of the requester thowards the specified destination port in the request's body
+
+On this release it is only able to create ALLOW rules to requests coming from the IP of the requester thowards the specified destination port in the request's body.
+The rules are created using the `org.fedoraproject.FirewallD1.zone.addRichRule` dbus interface
+
 
 To regen the token or change configs run:
 `webFimos /etc/web-fimos/web-fimos.json --regen --host <HOST> --port <PORT>`
@@ -34,7 +37,7 @@ To install webFimos, follow these steps:
     ```shell
     cd SOURCES
     go build
-    sudo rpmbuild -bb ../webFimos.spec
+    sudo rpmbuild -bb webFimos.spec
     sudo rpm -i ../RPMS/x86_64/webFimos-1.0-1.el8.x86_64.rpm
 
     ```
