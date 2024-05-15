@@ -51,7 +51,7 @@ To install webFimos, follow these steps:
 
 ## Usage
 
-To use webFimos, make HTTP requests to the server and include the generated token in the request headers as follows:
+To use webFimos, make HTTP requests to the server and include the generated token in the request's body as follows:
 
 ```shell
     curl <HOST>:<PORT> -X POST --data '{"destinationPort": <DEST_PORT>, "protocol": "tcp", "duration": <DURATION>, "token": "<TOKEN>"}'
