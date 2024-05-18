@@ -3,12 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-
 	"github.com/godbus/dbus"
 )
 
-// Functions that interact with the firewalld d-bus interface to create new firewall rules to open or close ports
-// to specific IPs
 
 func addRule(sourceIP string, destinationPort int, networkInterface string, protocol string) error {
 	conn, err := dbus.SystemBus()

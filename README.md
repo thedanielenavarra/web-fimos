@@ -9,9 +9,10 @@ The rules are created using the `org.fedoraproject.FirewallD1.zone.addRichRule` 
 
 
 To regen the token or change configs run:
-`webFimos /etc/web-fimos/web-fimos.json --regen --host <HOST> --port <PORT>`
+`webFimos --config /etc/web-fimos/web-fimos.json --regen`
 
-Remember to replace \<HOST> with the host you want the server to expose as and \<PORT> as the port it has to listen to.
+NOTE: you can specify the host and port with --host and --port flags
+
 
 Es.:
 
@@ -38,15 +39,21 @@ To install webFimos, follow these steps:
     cd SOURCES
     go build
     sudo rpmbuild -bb webFimos.spec
+    ```
+ 
+
+3. Install the RPM package:
+   
+   ```shell
     sudo rpm -i ../RPMS/x86_64/webFimos-1.0-1.el8.x86_64.rpm
 
     ```
 
 
-3. Start the HTTP server:
+4. Start the HTTP server:
 
     ```shell
-    systemctl start web-fimos
+    sudo systemctl start web-fimos
     ```
 
 ## Usage

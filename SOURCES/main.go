@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -17,28 +17,34 @@ type Request struct {
 	Token           string `json:"token"`
 }
 
-func main() {
-	// execute the init() function from auth.go
-	println("Executing the init() function from auth.go")
-	configInit(os.Args[1])
-	// if the program is executed with the --regen flag, call the tokenRegeneration function from auth.go and exit
-	if len(os.Args) > 2 && os.Args[2] == "--regen" {
-		println("Calling the tokenRegeneration function from auth.go")
-		// check if the program is executed with the --host <hostname> --port <port> flags
-		if len(os.Args) > 5 && os.Args[3] == "--host" && os.Args[5] == "--port" {
-			port, err := strconv.Atoi(os.Args[6])
-			if err != nil {
-				fmt.Println("Invalid port number")
-				return
-			}
-			host := os.Args[4]
-			tokenRegeneration(host, port)
-			return
-		}
+// add flags, the config file is first and mandatory, the --regen flag is optional as well as the --host and --port flags
+var (
+	configFile = flag.String("config", "", "Config file")
+	regen      = flag.Bool("regen", false, "Regenerate the token")
+	host       = flag.String("host", "localhost", "Host to connect to")
+	port       = flag.Int("port", 9091, "Port to connect to")
+)
 
-		tokenRegeneration(config.Host, config.Port)
+func main() {
+	flag.Usage = func() {
+		fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", "webFimos")
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+	configInit(*configFile)
+	if *host != "" {
+		config.Host = *host
+	}
+	if *port != 0 {
+		config.Port = *port
+	}
+	if *regen {
+		tokenRegeneration()
+		writeConfig()
+		fmt.Println("Token regenerated, config file updated")
 		return
 	}
+
 	// start an http server
 	println("Starting an http server on " + config.Host + ":" + strconv.Itoa(config.Port) + "...")
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
