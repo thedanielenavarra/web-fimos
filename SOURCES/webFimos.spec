@@ -33,7 +33,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_systemdunitdir}/web-fimos.service
 
 %post
 /usr/bin/systemctl daemon-reload
-webFimos /etc/web-fimos/web-fimos.json --regen --host localhost --port 9091 > /var/log/web-fimos/web-fimos.log 2>&1
+webFimos --config /etc/web-fimos/web-fimos.json --regen --host localhost --port 9091 > /var/log/web-fimos/web-fimos.log 2>&1
 
 %files
 %{_systemdunitdir}/web-fimos.service

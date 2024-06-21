@@ -32,13 +32,13 @@ func main() {
 	}
 	flag.Parse()
 	configInit(*configFile)
-	if *host != "" {
-		config.Host = *host
-	}
-	if *port != 0 {
-		config.Port = *port
-	}
 	if *regen {
+		if *host != "" {
+			config.Host = *host
+		}
+		if *port != 0 {
+			config.Port = *port
+		}
 		tokenRegeneration()
 		writeConfig()
 		fmt.Println("Token regenerated, config file updated")
@@ -93,5 +93,9 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintf(w, "Rule added for %s on port %d with protocol %s", remoteIP, request.DestinationPort, request.Protocol)
 	})
-	http.ListenAndServe(config.Host+":"+strconv.Itoa(config.Port), nil)
+	err := http.ListenAndServe(config.Host+":"+strconv.Itoa(config.Port), nil)
+	if err != nil {
+		fmt.Println("Error starting the http server: ", err)
+	}
+
 }

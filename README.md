@@ -36,9 +36,10 @@ To install webFimos, follow these steps:
    Please note that the Go compiler is necessary to execute this step
 
     ```shell
+    echo '%_topdir '$PWD > ~/.rpmmacros
     cd SOURCES
     go build
-    sudo rpmbuild -bb webFimos.spec
+    rpmbuild -bb webFimos.spec
     ```
  
 
